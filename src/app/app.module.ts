@@ -10,6 +10,7 @@ import { CompaniesPage } from '../pages/companies/companies';
 import { CompanyDetailsPage } from '../pages/company-details/company-details';
 import { FiltersPage } from '../pages/filters/filters';
 import { MenuPage } from '../pages/menu/menu';
+import { MapPage } from '../pages/map/map';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { RetrieveCompaniesService } from './retrieve-companies.service';
@@ -29,6 +30,7 @@ registerLocaleData(localeFr, 'fr');
         CompanyDetailsPage,
         FiltersPage,
         MenuPage,
+        MapPage,
         TabsPage
     ],
     imports: [
@@ -45,6 +47,7 @@ registerLocaleData(localeFr, 'fr');
         CompanyDetailsPage,
         FiltersPage,
         MenuPage,
+        MapPage,
         TabsPage
     ],
     providers: [
