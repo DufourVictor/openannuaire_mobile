@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="ios-menu-outline"></ion-icon>
+        </button>
+        <ion-title>Tableau</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <page-filters paramName="name" paramlabel="Recherche" [multiple]="false" [needName]="false"></page-filters>
+
+    <ion-list>
+        <button ion-item *ngFor="let company of companies" (click)="openCompanyDetails(company)">
+            {{ company.name }}
+            <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+        </button>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

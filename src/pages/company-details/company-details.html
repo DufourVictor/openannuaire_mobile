@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ company.name }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            Nom: {{ company.name }}<br>
+            Siren: {{ company.siren }}<br>
+            Adresse: {{ company.address }}<br>
+            Code postal: {{ company.postal_code }}<br>
+            Ville: {{ company.city }}<br>
+            Activité: {{ company.activity }}<br>
+            Catégorie: {{ company.category }}<br>
+            Effectif: {{ company.effectif }}<br/>
+        </ion-card-content>
+    </ion-card>
+    <div #map_detail_companies id="map-detail-companies"></div>
+    <ion-card *ngIf="isLocalized">
+        <ion-item>
+            <ion-icon name="people" item-start large></ion-icon>
+            <h2>{{ company.name }}</h2>
+            <p class="address">{{ company.address }} {{ company.postal_code }} {{ company.city }}</p>
+        </ion-item>
+    </ion-card>
+</ion-content>
