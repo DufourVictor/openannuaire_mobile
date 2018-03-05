@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="ios-menu-outline"></ion-icon>
+        </button>
+        <ion-title>Export</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div id="export">
+        <h1>Format de fichiers plats</h1>
+        <div class="section-download-doc">
+            <p class="download-doc-type">CSV</p>
+            <button (click)="export('csv', true)">
+                <ion-icon ios="ios-download" md="md-download"></ion-icon>
+                Jeu de données entier
+            </button>
+            <button (click)="export('csv')">
+                <ion-icon ios="ios-download" md="md-download"></ion-icon>
+                <span *ngIf="totalCompanies > 1">
+                    Seulement les {{ (totalCompanies > 10000) ? "10 000": totalCompanies| number:'':'fr' }} enregistrements sélectionnés
+                </span>
+                <span *ngIf="totalCompanies <= 1">
+                    Seulement les {{ totalCompanies| number:'':'fr' }} enregistrement sélectionné
+                </span>
+            </button>
+            <p class="download-doc-info">Le CSV utilise le point-virgule (;) comme séparateur.</p>
+        </div>
+
+        <div class="section-download-doc">
+            <p class="download-doc-type">JSON</p>
+            <button (click)="export('json', true)">
+                <ion-icon ios="ios-download" md="md-download"></ion-icon>
+                Jeu de données entier
+            </button>
+            <button (click)="export('json')">
+                <ion-icon ios="ios-download" md="md-download"></ion-icon>
+                <span *ngIf="totalCompanies > 1">
+                    Seulement les {{ (totalCompanies > 10000) ? "10 000": totalCompanies| number:'':'fr' }} enregistrements sélectionnés
+                </span>
+                <span *ngIf="totalCompanies <= 1">
+                    Seulement les {{ totalCompanies| number:'':'fr' }} enregistrement sélectionné
+                </span>
+            </button>
+        </div>
+
+        <div class="section-download-doc">
+            <p class="download-doc-type">Excel</p>
+            <button (click)="export('xls', true)">
+                <ion-icon ios="ios-download" md="md-download"></ion-icon>
+                Jeu de données entier
+            </button>
+            <button (click)="export('xls')">
+                <ion-icon ios="ios-download" md="md-download"></ion-icon>
+                <span *ngIf="totalCompanies > 1">
+                    Seulement les {{ (totalCompanies > 10000) ? "10 000": totalCompanies| number:'':'fr' }} enregistrements sélectionnés
+                </span>
+                <span *ngIf="totalCompanies <= 1">
+                    Seulement les {{ totalCompanies| number:'':'fr' }} enregistrement sélectionné
+                </span>
+            </button>
+        </div>
+    </div>
+</ion-content>
