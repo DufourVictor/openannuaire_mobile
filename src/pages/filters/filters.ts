@@ -42,13 +42,13 @@ export class FiltersPage implements OnInit {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
             if (filter.value) {
-                this.filter.addValue(filter.value.trim());
+                this.filter.addValue(filter.value.toUpperCase().trim());
             }
             else if (
                 (undefined !== filter.trim() && 0 !== filter.trim().length) ||
                 ('name' === this.paramName && 0 === filter.trim().length)
             ) {
-                this.filter.addValue(filter.trim());
+                this.filter.addValue(filter.toUpperCase().trim());
             }
 
             this.addFacet();
