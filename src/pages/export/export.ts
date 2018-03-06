@@ -9,12 +9,12 @@ import { ExportService } from '../../app/export.service';
 })
 export class ExportPage implements OnInit {
     companies: Company[];
-    nhits: number;
+    totalCompanies: number;
     loaded: boolean;
 
     constructor(private retrieveCompaniesService: RetrieveCompaniesService, private exportService: ExportService) {
         this.retrieveCompaniesService.totalCompanies.subscribe(
-            (nhits: number) => this.nhits = nhits
+            (total: number) => this.totalCompanies = total
         );
     }
 
@@ -25,7 +25,7 @@ export class ExportPage implements OnInit {
     export(format, allData) {
         if (!allData) {
             this.loaded = false;
-            this.retrieveCompaniesService.loadNextCompanies(this.nhits);
+            this.retrieveCompaniesService.loadNextCompanies(this.totalCompanies);
             this.retrieveCompaniesService.retrieveCompanies.subscribe((companies: Company[]) => {
                 if (!this.loaded) {
                     this.loaded = true;

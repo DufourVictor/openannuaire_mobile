@@ -47,8 +47,8 @@ export class RetrieveCompaniesService {
     }
 
     dispatchEvents() {
-        this.onQuery.emit(this.query.queryBuilder(this.filters));
         this.totalCompanies.emit(this.nhits);
+        this.onQuery.emit(this.query.queryBuilder(this.filters));
         this.facetGroupsCompanies.emit(this.facetGroups);
         this.retrieveCompanies.emit(this.companies as Company[]);
         this.loading.dismissAll();
