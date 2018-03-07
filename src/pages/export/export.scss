@@ -1,0 +1,16 @@
+@import "../../theme/colors";
+
+#export {
+    h1 {
+        text-align: center;
+    }
+
+    .section-download-doc {
+        text-align: center;
+
+        .download-doc-type {
+            font-weight: 400;
+            font-size: 20px;
+        }
+    }
+}

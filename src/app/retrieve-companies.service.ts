@@ -1,12 +1,12 @@
-import {Injectable, EventEmitter} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import {ApiInterface} from './Model/api-interface';
-import {CompanyInterface} from './Model/company-interface';
-import {Company} from './Model/company';
-import {QueryBuilderService} from './query-builder.service';
-import {Filter} from './Model/filter';
-import {Loading, LoadingController} from 'ionic-angular';
+import { ApiInterface } from './Model/api-interface';
+import { CompanyInterface } from './Model/company-interface';
+import { Company } from './Model/company';
+import { QueryBuilderService } from './query-builder.service';
+import { Filter } from './Model/filter';
+import { Loading, LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class RetrieveCompaniesService {
@@ -21,6 +21,8 @@ export class RetrieveCompaniesService {
     totalCompanies = new EventEmitter();
     facetCompanies = new EventEmitter();
     facetGroupsCompanies = new EventEmitter();
+    onQuery = new EventEmitter();
+
     filters: Filter[] = [];
     start: number = 0;
     nhits: number = 0;
@@ -29,11 +31,7 @@ export class RetrieveCompaniesService {
     facets: string[] = [];
     facetGroups = {};
 
-    constructor(
-        private http: HttpClient,
-        private query: QueryBuilderService,
-        public loadingCtrl: LoadingController
-    ) {
+    constructor(private http: HttpClient, private query: QueryBuilderService, public loadingCtrl: LoadingController) {
         this.filterCompanies.subscribe((filter: Filter) => {
             if (!this.filters.some(x => x === filter)) {
                 this.filters.push(filter);
@@ -50,6 +48,7 @@ export class RetrieveCompaniesService {
 
     dispatchEvents() {
         this.totalCompanies.emit(this.nhits);
+        this.onQuery.emit(this.query.queryBuilder(this.filters));
         this.facetGroupsCompanies.emit(this.facetGroups);
         this.retrieveCompanies.emit(this.companies as Company[]);
         this.loading.dismissAll();
@@ -110,7 +109,7 @@ export class RetrieveCompaniesService {
         this.loading.present();
     }
 
-    loadNextCompanies(rows: number = null)  {
+    loadNextCompanies(rows: number = null) {
         if (null !== rows) {
             if (RetrieveCompaniesService.MAX_ROWS <= rows) {
                 rows = RetrieveCompaniesService.MAX_ROWS;

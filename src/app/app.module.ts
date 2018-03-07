@@ -6,15 +6,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagInputModule } from 'ngx-chips';
 import { HttpClientModule } from '@angular/common/http';
 
+import { File } from '@ionic-native/file';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+
 import { CompaniesPage } from '../pages/companies/companies';
 import { CompanyDetailsPage } from '../pages/company-details/company-details';
 import { FiltersPage } from '../pages/filters/filters';
 import { MenuPage } from '../pages/menu/menu';
 import { MapPage } from '../pages/map/map';
+import { ExportPage } from '../pages/export/export';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { RetrieveCompaniesService } from './retrieve-companies.service';
 import { QueryBuilderService } from './query-builder.service';
+import { ExportService } from './export.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,6 +36,7 @@ registerLocaleData(localeFr, 'fr');
         FiltersPage,
         MenuPage,
         MapPage,
+        ExportPage,
         TabsPage
     ],
     imports: [
@@ -48,13 +54,18 @@ registerLocaleData(localeFr, 'fr');
         FiltersPage,
         MenuPage,
         MapPage,
+        ExportPage,
         TabsPage
     ],
     providers: [
         RetrieveCompaniesService,
         QueryBuilderService,
+        ExportService,
         StatusBar,
         SplashScreen,
+        File,
+        FileTransfer,
+        FileTransferObject,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
