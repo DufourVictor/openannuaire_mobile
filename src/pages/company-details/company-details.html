@@ -6,21 +6,21 @@
 
 <ion-content>
     <ion-card>
-        <ion-card-content>
-            Nom: {{ company.name }}<br>
-            Siren: {{ company.siren }}<br>
-            Adresse: {{ company.address }}<br>
-            Code postal: {{ company.postal_code }}<br>
-            Ville: {{ company.city }}<br>
-            Activité: {{ company.activity }}<br>
-            Catégorie: {{ company.category }}<br>
-            Effectif: {{ company.effectif }}<br/>
+        <ion-card-content class="company-details">
+            <ion-icon name="ios-contact-outline"></ion-icon> Nom: {{ company.name }}<br>
+            <ion-icon name="ios-bookmark-outline"></ion-icon> Siren: {{ company.siren }}<br>
+            <ion-icon name="ios-map-outline"></ion-icon> Adresse: {{ company.address }}<br>
+            <ion-icon name="ios-navigate-outline"></ion-icon> Code postal: {{ company.postal_code }}<br>
+            <ion-icon name="ios-locate-outline"></ion-icon> Ville: {{ company.city }}<br>
+            <ion-icon name="ios-git-network-outline"></ion-icon> Activité: {{ company.activity }}<br>
+            <ion-icon name="ios-arrow-dropup-outline"></ion-icon> Catégorie: {{ company.category }}<br>
+            <ion-icon name="ios-people-outline"></ion-icon> Effectif: {{ company.effectif }}<br/>
         </ion-card-content>
     </ion-card>
     <div #map_detail_companies id="map-detail-companies"></div>
     <ion-card *ngIf="isLocalized">
         <ion-item>
-            <ion-icon name="people" item-start large></ion-icon>
+            <ion-icon name="ios-people-outline" item-start large></ion-icon>
             <h2>{{ company.name }}</h2>
             <p class="address">{{ company.address }} {{ company.postal_code }} {{ company.city }}</p>
         </ion-item>
