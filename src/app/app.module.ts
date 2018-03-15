@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { Network } from '@ionic-native/network';
 
 import { CompaniesPage } from '../pages/companies/companies';
 import { CompanyDetailsPage } from '../pages/company-details/company-details';
@@ -65,6 +66,7 @@ registerLocaleData(localeFr, 'fr');
         SplashScreen,
         File,
         FileTransfer,
+        Network,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
