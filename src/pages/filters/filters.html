@@ -25,7 +25,7 @@
 <div *ngIf="multiple && type === 'selectObject'">
     <tag-input [(ngModel)]="items" [placeholder]="paramLabel" [secondaryPlaceholder]="paramLabel" #select
                (onAdd)="addFilter($event)" [id]="display ? 'hide' : 'show'" [onlyFromAutocomplete]="true">
-        <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="options"></tag-input-dropdown>
+        <tag-input-dropdown [keepOpen]="false" [showDropdownIfEmpty]="true" [autocompleteItems]="options"></tag-input-dropdown>
     </tag-input>
 
     <div class="tags" *ngIf="0 !== filter.values.length">

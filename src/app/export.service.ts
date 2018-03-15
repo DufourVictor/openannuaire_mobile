@@ -24,7 +24,6 @@ export class ExportService {
     query = '';
     fileTransfer: FileTransferObject = this.transfer.create();
 
-
     constructor(
         private retrieveCompaniesService: RetrieveCompaniesService,
         private platform: Platform,
