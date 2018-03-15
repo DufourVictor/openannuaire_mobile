@@ -31,7 +31,7 @@ export class ExportService {
         private transfer: FileTransfer,
         private file: File
     ) {
-        this.retrieveCompaniesService.totalCompanies.subscribe((total: number) => {
+        this.retrieveCompaniesService.retrieveCompanies.subscribe((total: number) => {
             this.totalCompanies = total;
         });
         this.retrieveCompaniesService.onQuery.subscribe((query) => {
@@ -97,7 +97,7 @@ export class ExportService {
         const data: Blob = new Blob([excelBuffer], {
             type: EXCEL_HTA,
         });
-        this.exportForMobile('json', data);
+        this.exportForMobile('xls', data);
     }
 
     exportJson(companies: Company[]) {

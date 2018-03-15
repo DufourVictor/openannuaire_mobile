@@ -13,6 +13,7 @@ export class RetrieveCompaniesService {
     static DATASET = 'sirene';
     static LANG = 'fr';
     static MAX_ROWS = 10000;
+    static DEFAULT_ROWS = 100;
 
     private url = 'https://public.opendatasoft.com/api/records/1.0/search/';
     companies: Company[] = [];
@@ -48,7 +49,6 @@ export class RetrieveCompaniesService {
 
     dispatchEvents() {
         this.totalCompanies.emit(this.nhits);
-        this.onQuery.emit(this.query.queryBuilder(this.filters));
         this.facetGroupsCompanies.emit(this.facetGroups);
         this.retrieveCompanies.emit(this.companies as Company[]);
         this.loading.dismissAll();
@@ -56,6 +56,7 @@ export class RetrieveCompaniesService {
 
     getCompanies() {
         this.createLoader();
+        this.onQuery.emit(this.query.queryBuilder(this.filters));
         return this.http.get(this.url, {
             params: {
                 dataset: RetrieveCompaniesService.DATASET,
@@ -90,12 +91,18 @@ export class RetrieveCompaniesService {
         );
     }
 
-    reloadCompanies(reload = false) {
+    reloadCompanies(reload: boolean = false, number: number = 0) {
         if (reload) {
             this.companies = [];
             this.start = 0;
 
-            this.getCompanies();
+            if (number !== 0) {
+                this.rows = number;
+            } else {
+                this.rows = RetrieveCompaniesService.DEFAULT_ROWS;
+            }
+
+            return this.getCompanies();
         }
 
         this.dispatchEvents();

@@ -19,7 +19,7 @@ export class ExportPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.retrieveCompaniesService.getCompanies();
+        this.retrieveCompaniesService.reloadCompanies();
     }
 
     export(format, allData) {
