@@ -6,7 +6,7 @@ import { Company } from './Model/company';
 import { RetrieveCompaniesService } from "./retrieve-companies.service";
 import { File } from "@ionic-native/file";
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { Platform } from "ionic-angular";
+import { AlertController, Platform } from "ionic-angular";
 
 const EXCEL_HTA = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const JSON_HTA = 'application/json;charset=UTF-8';
@@ -23,12 +23,14 @@ export class ExportService {
     header = '&timezone=Europe/Berlin&use_labels_for_header=true';
     query = '';
     fileTransfer: FileTransferObject = this.transfer.create();
+    alert = null;
 
     constructor(
         private retrieveCompaniesService: RetrieveCompaniesService,
         private platform: Platform,
         private transfer: FileTransfer,
-        private file: File
+        private file: File,
+        private alertCtrl: AlertController
     ) {
         this.retrieveCompaniesService.retrieveCompanies.subscribe((total: number) => {
             this.totalCompanies = total;
@@ -118,15 +120,28 @@ export class ExportService {
 
     exportForMobile(format, data) {
         if (this.platform.is('android')) {
-            this.fileTransfer.download(this._url + format + this.query + this.header, this.file.externalDataDirectory + this.filename + '.' + format).then((entry) => {
-            }, (error) => {
-                window.alert('erreur export : ' + error.message);
-            });
+            this.fileTransfer.download(this._url + format + this.query + this.header, this.file.externalDataDirectory + this.filename + '.' + format).then(
+                (entry) => {
+                },
+                (error) => {
+                    window.alert('erreur export : ' + error.message);
+                });
         } else if (this.platform.is('ios')) {
-            this.fileTransfer.download(this._url + format + this.query + this.header, this.file.documentsDirectory + this.filename + '.' + format).then((entry) => {
-            }, (error) => {
-                window.alert('erreur export : ' + error.message);
-            });
+            this.fileTransfer.download(this._url + format + this.query + this.header, this.file.documentsDirectory + this.filename + '.' + format).then(
+                (entry) => {
+                    this.alert = this.alertCtrl.create({
+                        title: 'Export réussi !',
+                        subTitle: 'Le fichier a été exporté avec succès',
+                    });
+                },
+                (error) => {
+                    this.alert = this.alertCtrl.create({
+                        title: 'Erreur durant l\'export !',
+                        subTitle: 'Une erreur est survenue pendant l\'export',
+                    });
+                });
+
+                this.alert.present();
         } else {
             FileSaver.saveAs(data, this.filename);
         }
