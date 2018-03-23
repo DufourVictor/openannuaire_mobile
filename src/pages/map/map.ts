@@ -12,6 +12,7 @@ export class MapPage implements OnInit {
     @ViewChild('map') mapRef: ElementRef;
     companies: Company[];
     alreadyFiltered = false;
+    currentModal = null;
 
     constructor(private retrieveCompaniesService: RetrieveCompaniesService) {
         this.retrieveCompaniesService.filterCompanies.subscribe(
@@ -51,7 +52,11 @@ export class MapPage implements OnInit {
                 let infoWindow = this.infoWindow(content);
                 let marker = this.addMarker(latLng, map, company.name);
 
-                marker.addListener('click', function () {
+                marker.addListener('click', () => {
+                    if (this.currentModal !== null) {
+                        this.currentModal.close();
+                    }
+                    this.currentModal = infoWindow;
                     infoWindow.open(map, marker);
                 });
             }

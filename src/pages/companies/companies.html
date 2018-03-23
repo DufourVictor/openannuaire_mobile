@@ -5,11 +5,11 @@
         </button>
         <ion-title>Tableau</ion-title>
     </ion-navbar>
+
+    <page-filters paramName="name" paramlabel="Recherche" [multiple]="false" [needName]="false"></page-filters>
 </ion-header>
 
 <ion-content>
-    <page-filters paramName="name" paramlabel="Recherche" [multiple]="false" [needName]="false"></page-filters>
-
     <ion-list>
         <button ion-item *ngFor="let company of companies" (click)="openCompanyDetails(company)">
             {{ company.name }}
